@@ -1,0 +1,22 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{{ path('app') }}">Forum</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="{{ path('app') }}">Home</a></li>
+            <li><a href="{{ path('category_index') }}">Categories</a></li>
+            <li><a href="{{ path('post_index') }}">Posts</a></li>
+            <li><a href="{{ path('message_index') }}">Messages</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            {% if is_granted('ROLE_USER') %}
+            <li><a href="{{ path('fos_user_profile_show') }}">Compte</a></li>
+            <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
+            {% elseif is_granted('ROLE_ANONYMOUS') %}
+            <li><a href="{{ path('fos_user_security_login') }}">Connexion</a></li>
+            <li><a href="{{ path('fos_user_registration_register') }}">Inscription</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>

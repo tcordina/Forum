@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="category text-center" style="border-radius: 5px;color: #fff; background: #337ab7; padding-bottom: 10px; padding-top: 1px">
+                <h1 style="font-size: ">{{ category.name|upper }}</h1>
+            </div>
+        </div>
+    </div>
+
+    <br/>
+        {% for post in listPosts %}
+            <a href="{{ path('post_show', {'id': post.id}) }}" style="color: #333; text-decoration: none;">
+                <div class="row" style="border: 5px solid #337ab7; border-radius: 5px;">
+                    <div class="container">
+                        <h2>
+                            <b>{{ post.title }}</b> | posted by {{ post.autor }}
+                        </h2>
+                        <span class="text-muted">{{ post.createdat|date('d/m/Y H:i') }}</span>
+                    </div>
+                </div>
+            </a>
+            <br/>
+        {% endfor %}
+    <hr>
+    <ul>
+        <li>
+            <a href="{{ path('category_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('category_edit', { 'id': category.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input class="btn btn-primary" type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+</div>
+{% endblock %}

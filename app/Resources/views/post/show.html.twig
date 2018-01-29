@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container">
+    <h1>Post</h1>
+
+    <div class="row">
+        <div class="post">
+            <div class="col-md-2 text-center" style="border-right: 1px solid #333;">
+                <img src="{{ asset('assets/images/pp.png') }}" width="100px" height="100px" alt="pp" class="img-responsive center-block">
+                <h3>{{ post.autor }}</h3>
+            </div>
+            <div class="col-md-10">
+                <p>
+                    {{ post.content }}
+                </p>
+            </div>
+        </div>
+    </div>
+
+    {% if is_granted('ROLE_USER') %}
+        <h1>Message creation</h1>
+        {{ form_start(message_form) }}
+        {{ form_widget(message_form) }}
+        <input class="btn btn-primary" type="submit" value="Envoyer" />
+        {{ form_end(message_form) }}
+    {% endif %}
+
+    <h2>Messages for <i>{{ post.title }}</i></h2>
+
+    <ul>
+        {% for message in listMessages %}
+            <div class="row">
+                <div class="message">
+                    <div class="col-md-2 text-center">
+                        <img src="{{ asset('assets/images/pp2.jpg') }}" width="100px" height="100px" alt="pp" class="img-responsive center-block">
+                        <h3>{{ message.autor }}</h3>
+                    </div>
+                    <div class="col-md-10">
+                        <p>
+                            {{ message.content }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <hr/>
+        {% endfor %}
+    </ul>
+    {% if is_granted('ROLE_ADMIN') or isAutor %}
+    <ul>
+        <li>
+            <a href="{{ path('post_edit', { 'id': post.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input class="btn btn-primary" type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+    {% endif %}
+</div>
+{% endblock %}

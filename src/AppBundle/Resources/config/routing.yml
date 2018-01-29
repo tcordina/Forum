@@ -1,0 +1,16 @@
+app:
+    path:     /
+    defaults: { _controller: "AppBundle:Base:index" }
+    methods:  GET
+
+app_post:
+    resource: "@AppBundle/Resources/config/routing/post.yml"
+    prefix:   /post
+
+app_category:
+    resource: "@AppBundle/Resources/config/routing/category.yml"
+    prefix: /category
+
+app_message:
+    resource: "@AppBundle/Resources/config/routing/message.yml"
+    prefix: /message

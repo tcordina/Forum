@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container">
+    {% for category in categories %}
+        <a href="{{ path('category_show', {'id': category.id}) }}" style="color: #333; text-decoration: none;">
+            <div class="row" style="padding-bottom: 10px; border: 5px solid #337ab7; border-radius: 5px;">
+                <div class="category text-center" style="color: #337ab7;">
+                    <h2>{{ category.name }}</h2>
+                </div>
+            </div>
+        </a>
+        <br/>
+    {% endfor %}
+
+    {% if is_granted('ROLE_ADMIN') %}
+    <ul>
+        <li>
+            <a href="{{ path('category_new') }}">Create a new category</a>
+        </li>
+    </ul>
+    {% endif %}
+</div>
+{% endblock %}
