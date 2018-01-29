@@ -2,7 +2,7 @@
 
 {% block body %}
 <div class="container">
-    <h1>Posts list</h1>
+    <h1>Liste des posts</h1>
 
         {% for post in posts %}
             <a href="{{ path('post_show', {'id': post.id}) }}" style="color: #333; text-decoration: none;">
@@ -10,7 +10,7 @@
                 <div class="container">
                     <h2>
                         <span class="label label-primary"> {{ post.category.name }}</span>
-                        <b>{{ post.title }}</b> | posted by {{ post.autor }}
+                        <b>{{ post.title }}</b> | posté par {{ post.autor }}
                     </h2>
                     <span class="text-muted">{{ post.createdat|date('d/m/Y H:i') }}</span>
                 </div>
@@ -22,7 +22,7 @@
     <br><br><br>
     <ul>
         <li>
-            <a href="{{ path('post_new') }}">Create a new post</a>
+            <a href="{{ path('post_new') }}">Nouveau post</a>
         </li>
     </ul>
 </div>

@@ -31,7 +31,7 @@ class PostController extends Controller
         $user = $this->get('security.token_storage')->getToken()->getUser();
         $form = $this->createForm('AppBundle\Form\PostType', $post);
         $form->handleRequest($request);
-        $post->setAutor($user);
+        //$post->setAutor($user);
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($post);

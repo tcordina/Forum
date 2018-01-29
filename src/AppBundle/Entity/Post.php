@@ -14,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Post
 {
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category")
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $category;
