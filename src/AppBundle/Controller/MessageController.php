@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Message;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\SecurityBundle\SecurityBundle;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -24,30 +25,6 @@ class MessageController extends Controller
 
         return $this->render('message/index.html.twig', array(
             'messages' => $messages,
-        ));
-    }
-
-    /**
-     * Creates a new message entity.
-     *
-     */
-    public function newAction(Request $request)
-    {
-        $message = new Message();
-        $form = $this->createForm('AppBundle\Form\MessageType', $message);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($message);
-            $em->flush();
-
-            return $this->redirectToRoute('message_show', array('id' => $message->getId()));
-        }
-
-        return $this->render('message/new.html.twig', array(
-            'message' => $message,
-            'form' => $form->createView(),
         ));
     }
 
@@ -97,21 +74,17 @@ class MessageController extends Controller
         $form = $this->createDeleteForm($message);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($message);
-            $em->flush();
-        }
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($message);
+        $em->flush();
 
-        return $this->redirectToRoute('message_index');
+        $referer = $request->headers->get('referer');
+        return $this->redirect($referer);
     }
 
     /**
      * Creates a form to delete a message entity.
      *
-     * @param Message $message The message entity
-     *
-     * @return \Symfony\Component\Form\Form The form
      */
     private function createDeleteForm(Message $message)
     {

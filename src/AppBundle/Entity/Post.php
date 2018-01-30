@@ -195,4 +195,9 @@ class Post
     {
         return $this->category;
     }
+
+    public function __construct(UserAdmin $user)
+    {
+        $this->setAutor($user);
+    }
 }

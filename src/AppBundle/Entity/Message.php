@@ -164,4 +164,10 @@ class Message
     {
         return $this->post;
     }
+
+    public function __construct(UserAdmin $user = null, Post $post)
+    {
+        $this->setAutor($user);
+        $this->setPost($post);
+    }
 }

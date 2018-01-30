@@ -21,4 +21,4 @@ message_edit:
 message_delete:
     path:     /{id}/delete
     defaults: { _controller: "AppBundle:Message:delete" }
-    methods:  DELETE
+    methods:  [GET, DELETE]

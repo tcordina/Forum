@@ -3,20 +3,20 @@
 {% block body %}
 <div class="container">
     <div class="well col-md-4 col-md-offset-4">
-        <h1>Category edit</h1>
+        <h1>Edition catégorie</h1>
 
         {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
-        <input class="btn btn-primary" type="submit" value="Edit" />
+        <input class="btn btn-primary" type="submit" value="Editer" />
         {{ form_end(edit_form) }}
 
         <ul>
             <li>
-                <a href="{{ path('category_index') }}">Back to the list</a>
+                <a href="{{ path('category_index') }}">Retour à la liste</a>
             </li>
             <li>
                 {{ form_start(delete_form) }}
-                <input class="btn btn-primary" type="submit" value="Delete">
+                <input class="btn btn-primary" type="submit" value="Supprimer">
                 {{ form_end(delete_form) }}
             </li>
         </ul>

@@ -27,11 +27,10 @@ class PostController extends Controller
      */
     public function newAction(Request $request)
     {
-        $post = new Post();
         $user = $this->get('security.token_storage')->getToken()->getUser();
+        $post = new Post($user);
         $form = $this->createForm('AppBundle\Form\PostType', $post);
         $form->handleRequest($request);
-        //$post->setAutor($user);
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($post);
@@ -51,11 +50,10 @@ class PostController extends Controller
         $deleteForm = $this->createDeleteForm($post);
 
         $em = $this->getDoctrine()->getManager();
-
-        $message = new Message();
         $user = $this->get('security.token_storage')->getToken()->getUser();
-        $message->setPost($post);
-        $message->setAutor($user);
+        //die(var_dump($user));
+        if($user == 'anon.') $user = null;
+        $message = new Message($user, $post);
         $msgForm = $this->createForm('AppBundle\Form\MessageType', $message);
         $msgForm->handleRequest($request);
 
@@ -83,10 +81,10 @@ class PostController extends Controller
 
     public function editAction(Request $request, Post $post)
     {
-        $author = $post->getAutor();
+        $autor = $post->getAutor();
         $user = $this->get('security.token_storage')->getToken()->getUser();
         $admin = $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN');
-        if($author == $user ||  $admin) {
+        if($autor == $user ||  $admin) {
             $deleteForm = $this->createDeleteForm($post);
             $editForm = $this->createForm('AppBundle\Form\PostType', $post);
             $editForm->handleRequest($request);

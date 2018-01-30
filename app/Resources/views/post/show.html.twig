@@ -2,8 +2,8 @@
 
 {% block body %}
 <div class="container">
-    <h1>Post</h1>
-
+    <h1>{{ post.title }}</h1>
+    <hr/>
     <div class="row">
         <div class="post">
             <div class="col-md-2 text-center" style="border-right: 1px solid #333;">
@@ -19,14 +19,21 @@
     </div>
 
     {% if is_granted('ROLE_USER') %}
-        <h1>Message creation</h1>
+        <h2>Poster un commentaire</h2>
         {{ form_start(message_form) }}
         {{ form_widget(message_form) }}
         <input class="btn btn-primary" type="submit" value="Envoyer" />
         {{ form_end(message_form) }}
+    {% else %}
+        <br/><br/>
+        <p><b>Pour commenter veuillez <a href="{{ path('fos_user_security_login') }}">vous connecter</a></b></p>
     {% endif %}
 
-    <h2>Messages for <i>{{ post.title }}</i></h2>
+    {% if listMessages is not empty  %}
+        <h2>Commentaires pour <i>{{ post.title }}</i></h2>
+    {% else %}
+        <h2>Pas encore de commentaires pour <i>{{ post.title }}</i></h2>
+    {% endif %}
 
     <ul>
         {% for message in listMessages %}
@@ -40,6 +47,9 @@
                         <p>
                             {{ message.content }}
                         </p>
+                        {% if(is_granted('ROLE_ADMIN')) %}
+                            <a href="{{ path('message_delete', { 'id': message.id }) }}">Supprimer</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -49,11 +59,11 @@
     {% if is_granted('ROLE_ADMIN') or isAutor %}
     <ul>
         <li>
-            <a href="{{ path('post_edit', { 'id': post.id }) }}">Edit</a>
+            <a href="{{ path('post_edit', { 'id': post.id }) }}">Editer</a>
         </li>
         <li>
             {{ form_start(delete_form) }}
-                <input class="btn btn-primary" type="submit" value="Delete">
+                <input class="btn btn-primary" type="submit" value="Supprimer">
             {{ form_end(delete_form) }}
         </li>
     </ul>

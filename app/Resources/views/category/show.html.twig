@@ -17,7 +17,7 @@
                 <div class="row" style="border: 5px solid #337ab7; border-radius: 5px;">
                     <div class="container">
                         <h2>
-                            <b>{{ post.title }}</b> | posted by {{ post.autor }}
+                            <b>{{ post.title }}</b> | posté par {{ post.autor }}
                         </h2>
                         <span class="text-muted">{{ post.createdat|date('d/m/Y H:i') }}</span>
                     </div>
@@ -28,16 +28,18 @@
     <hr>
     <ul>
         <li>
-            <a href="{{ path('category_index') }}">Back to the list</a>
+            <a href="{{ path('category_index') }}">Retour à la liste</a>
         </li>
+        {% if(is_granted('ROLE_ADMIN')) %}
         <li>
-            <a href="{{ path('category_edit', { 'id': category.id }) }}">Edit</a>
+            <a href="{{ path('category_edit', { 'id': category.id }) }}">Editer</a>
         </li>
         <li>
             {{ form_start(delete_form) }}
-                <input class="btn btn-primary" type="submit" value="Delete">
+                <input class="btn btn-primary" type="submit" value="Supprimer">
             {{ form_end(delete_form) }}
         </li>
+        {% endif %}
     </ul>
 </div>
 {% endblock %}

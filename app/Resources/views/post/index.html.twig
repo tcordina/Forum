@@ -4,22 +4,21 @@
 <div class="container">
     <h1>Liste des posts</h1>
 
-        {% for post in posts %}
-            <a href="{{ path('post_show', {'id': post.id}) }}" style="color: #333; text-decoration: none;">
-            <div class="row" style="border: 5px solid #337ab7; border-radius: 5px;">
-                <div class="container">
-                    <h2>
-                        <span class="label label-primary"> {{ post.category.name }}</span>
-                        <b>{{ post.title }}</b> | posté par {{ post.autor }}
-                    </h2>
-                    <span class="text-muted">{{ post.createdat|date('d/m/Y H:i') }}</span>
-                </div>
+    {% for post in posts|reverse %}
+        <a href="{{ path('post_show', {'id': post.id}) }}" style="color: #333; text-decoration: none;">
+        <div class="row" style="border: 5px solid #337ab7; border-radius: 5px;">
+            <div class="container">
+                <h2>
+                    <span class="label label-primary"> {{ post.category.name }}</span>
+                    <b>{{ post.title }}</b> | posté par {{ post.autor }}
+                </h2>
+                <span class="text-muted">{{ post.createdat|date('d/m/Y H:i') }}</span>
             </div>
-            </a>
-            <br/>
-        {% endfor %}
+        </div>
+        </a>
+        <br/>
+    {% endfor %}
 
-    <br><br><br>
     <ul>
         <li>
             <a href="{{ path('post_new') }}">Nouveau post</a>

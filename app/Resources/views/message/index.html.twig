@@ -2,15 +2,16 @@
 
 {% block body %}
 <div class="container">
-    <h1>Messages list</h1>
+    <h1>Liste des messages</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Autor</th>
-                <th>Content</th>
-                <th>Createdat</th>
+                <th>Auteur</th>
+                <th>Contenu</th>
+                <th>Créé à</th>
+                <th>Article</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -19,15 +20,16 @@
             <tr>
                 <td><a href="{{ path('message_show', { 'id': message.id }) }}">{{ message.id }}</a></td>
                 <td>{{ message.autor }}</td>
-                <td>{{ message.content }}</td>
-                <td>{% if message.createdAt %}{{ message.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ message.content|length > 50 ? message.content|slice(0, 50) ~ '...' : message.content  }}</td>
+                <td>{% if message.createdAt %}{{ message.createdAt|date('d/m/Y H:i:s') }}{% endif %}</td>
+                <td>{{ message.post.title }}</td>
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('message_show', { 'id': message.id }) }}">show</a>
+                            <a href="{{ path('post_show', { 'id': message.post.id }) }}">voir</a>
                         </li>
                         <li>
-                            <a href="{{ path('message_edit', { 'id': message.id }) }}">edit</a>
+                            <a href="{{ path('message_edit', { 'id': message.id }) }}">editer</a>
                         </li>
                     </ul>
                 </td>
@@ -35,11 +37,5 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('message_new') }}">Create a new message</a>
-        </li>
-    </ul>
 </div>
 {% endblock %}
