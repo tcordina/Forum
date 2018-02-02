@@ -20,6 +20,13 @@ class Post
     private $category;
 
     /**
+     * @var array
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Message", mappedBy="post")
+     *
+     */
+    private $messages = array();
+
+    /**
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
@@ -199,5 +206,39 @@ class Post
     public function __construct(UserAdmin $user)
     {
         $this->setAutor($user);
+    }
+
+    /**
+     * Add message
+     *
+     * @param \AppBundle\Entity\Message $message
+     *
+     * @return Post
+     */
+    public function addMessage(Message $message)
+    {
+        $this->messages[] = $message;
+
+        return $this;
+    }
+
+    /**
+     * Remove message
+     *
+     * @param \AppBundle\Entity\Message $message
+     */
+    public function removeMessage(Message $message)
+    {
+        $this->messages->removeElement($message);
+    }
+
+    /**
+     * Get messages
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMessages()
+    {
+        return $this->messages;
     }
 }

@@ -15,8 +15,8 @@ class Message
 {
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Post")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Post", inversedBy="Message")
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $post;
 
@@ -140,5 +140,34 @@ class Message
     {
         return $this->createdAt;
     }
-}
 
+    /**
+     * Set post
+     *
+     * @param \AppBundle\Entity\Post $post
+     *
+     * @return Message
+     */
+    public function setPost(\AppBundle\Entity\Post $post)
+    {
+        $this->post = $post;
+
+        return $this;
+    }
+
+    /**
+     * Get post
+     *
+     * @return \AppBundle\Entity\Post
+     */
+    public function getPost()
+    {
+        return $this->post;
+    }
+
+    public function __construct(UserAdmin $user = null, Post $post)
+    {
+        $this->setAutor($user);
+        $this->setPost($post);
+    }
+}

@@ -17,7 +17,7 @@ class MessageType extends AbstractType
     {
         $builder
             //->add('autor')
-            ->add('content', TextareaType::class, array('attr' => array('rows' => 20)))
+            ->add('content', TextareaType::class, array('attr' => array('class' => 'area_comment')))
             /*->add('post', EntityType::class, array(
                 'class' => 'AppBundle:Post',
                 'choice_label' => 'title'

@@ -15,7 +15,7 @@ class Message
 {
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Post")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Post", inversedBy="message")
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $post;
