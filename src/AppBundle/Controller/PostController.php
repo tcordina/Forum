@@ -49,7 +49,6 @@ class PostController extends Controller
     {
         $deleteForm = $this->createDeleteForm($post);
 
-        $em = $this->getDoctrine()->getManager();
         $user = $this->get('security.token_storage')->getToken()->getUser();
         //die(var_dump($user));
         if($user == 'anon.') $user = null;
@@ -65,15 +64,9 @@ class PostController extends Controller
             return $this->redirectToRoute('post_show', array('id' => $post->getId()));
         }
 
-        $listMessages = $em
-            ->getRepository('AppBundle:Message')
-            ->findBy(array('post' => $post))
-        ;
-
         return $this->render('post/show.html.twig', array(
             'isAutor' => $user == $post->getAutor(),
             'post' => $post,
-            'listMessages' => $listMessages,
             'delete_form' => $deleteForm->createView(),
             'message_form' => $msgForm->createView(),
         ));

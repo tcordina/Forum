@@ -28,6 +28,11 @@ class MessageController extends Controller
         ));
     }
 
+    public function newAction()
+    {
+        
+    }
+
     /**
      * Finds and displays a message entity.
      *
