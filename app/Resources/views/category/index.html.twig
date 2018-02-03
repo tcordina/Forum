@@ -2,7 +2,7 @@
 
 {% block body %}
 <div class="container">
-    {% for category in categories %}
+    {% for category in categories|sortbyfield('name') %}
         <a href="{{ path('category_show', {'id': category.id}) }}" style="color: #333; text-decoration: none;">
             <div class="row" style="padding-bottom: 10px; border: 5px solid #337ab7; border-radius: 5px;">
                 <div class="category text-center" style="color: #337ab7;">

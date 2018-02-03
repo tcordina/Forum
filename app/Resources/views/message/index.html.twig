@@ -21,7 +21,7 @@
                 <td><a href="{{ path('message_show', { 'id': message.id }) }}">{{ message.id }}</a></td>
                 <td>{{ message.autor }}</td>
                 <td>{{ message.content|length > 50 ? message.content|slice(0, 50) ~ '...' : message.content  }}</td>
-                <td>{% if message.createdAt %}{{ message.createdAt|date('d/m/Y H:i:s') }}{% endif %}</td>
+                <td>{% if message.createdAt %}{{ message.createdAt|date('d/m/Y - H:i:s') }}{% endif %}</td>
                 <td>{{ message.post.title }}</td>
                 <td>
                     <ul>
