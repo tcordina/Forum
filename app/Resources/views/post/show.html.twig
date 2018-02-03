@@ -29,7 +29,7 @@
         <p><b>Pour commenter veuillez <a href="{{ path('fos_user_security_login') }}">vous connecter</a></b></p>
     {% endif %}
 
-    {% if listMessages is not empty  %}
+    {% if post.messages is not empty  %}
         <h2>Commentaires pour <i>{{ post.title }}</i></h2>
     {% else %}
         <h2>Pas encore de commentaires pour <i>{{ post.title }}</i></h2>
