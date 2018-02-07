@@ -241,4 +241,9 @@ class Post
     {
         return $this->messages;
     }
+
+    public function __toString()
+    {
+        return (string) $this->getTitle();
+    }
 }

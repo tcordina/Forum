@@ -1,0 +1,28 @@
+easy_admin:
+    formats:
+        date: 'd/m/Y'
+        time: 'H:i'
+        datetime: 'd/m/Y H:i:s'
+    entities:
+        UserAdmin:
+            class: AppBundle\Entity\UserAdmin
+            list:
+                fields: ['id', 'username', 'email', 'enabled', 'last_login', 'roles']
+            form:
+                fields: ['username', 'email', 'roles']
+        Post:
+            class: AppBundle\Entity\Post
+            list:
+                fields: ['id', 'autor', 'title', 'content', 'createdAt', 'category']
+            form:
+                fields: ['title', 'content', 'category']
+        Message:
+            class: AppBundle\Entity\Message
+            list:
+                fields: ['id', 'autor', 'content', 'createdAt', 'post']
+            form:
+                fields: ['content']
+        Category:
+            class: AppBundle\Entity\Category
+            list:
+                fields: ['id', 'name']

@@ -170,4 +170,10 @@ class Message
         $this->setAutor($user);
         $this->setPost($post);
     }
+
+    public function __toString()
+    {
+        return (string) $this->getContent();
+    }
+
 }
